@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HaloDirective } from './directives/halo.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HaloDirective
   ],
   imports: [
     BrowserModule,

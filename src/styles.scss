@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Digital7';
+  src: url('assets/font/digital-7.ttf');
+  src: local('Digital7'), url('assets/font/digital-7.ttf') format('truetype');
+}
+
+body {
+  background: #333333;
+  font-family: "Helvetica Neue";
+}
