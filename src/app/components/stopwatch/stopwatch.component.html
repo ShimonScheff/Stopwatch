@@ -13,10 +13,12 @@
     <span class="text" *ngIf="(displayTime$ | async) as data">
       <span>{{data[0]}}</span>
       <span>{{data[1]}}</span>
-      <span style="text-align: center">:</span>
+      <span [ngClass]="running ? 'blink' : ''"
+            style="text-align: center">:</span>
       <span>{{data[2]}}</span>
       <span>{{data[3]}}</span>
-      <span style="text-align: center">.</span>
+      <span [ngClass]="running ? 'blink' : ''"
+            style="text-align: center">.</span>
       <span>{{data[4]}}</span>
       <span>{{data[5]}}</span>
     </span>
