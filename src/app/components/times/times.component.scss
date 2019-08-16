@@ -1,0 +1,36 @@
+.logs {
+  text-align: left;
+  width: 360px;
+  color: white;
+  border-bottom: 1px solid #ffffff59;
+  line-height: 50px;
+  font-size: 22px;
+  position: relative;
+
+  span {
+    display: inline-block;
+    padding-right: 3px;
+    font-family: Digital7;
+
+  }
+
+  .remove {
+    visibility: hidden;
+  }
+}
+
+.logs:hover .remove {
+  visibility: visible;
+}
+
+.remove {
+  background-color: red;
+  font-size: 12px;
+  width: 60px;
+  line-height: 24px;
+  position: absolute;
+  right: 2px;
+  top: 10px;
+  text-align: center;
+  cursor: pointer;
+}
