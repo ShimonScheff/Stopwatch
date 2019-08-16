@@ -1,6 +1,13 @@
-import {defaultState, StopwatchModel} from '../modules/stopwatch.model';
+import {defaultState, StateModel, StopwatchModel} from '../modules/stopwatch.model';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
-import {ClearAll, PauseStopwatch, RemoveTimeFrame, SaveTimeFrame, StopWatchInterval} from '../actions/stopwatch.action';
+import {
+  ClearAll,
+  PauseStopwatch,
+  RemoveTimeFrame,
+  SaveTimeFrame,
+  StopWatchInterval,
+  UpdateFromLocalStorage
+} from '../actions/stopwatch.action';
 
 
 export class StopwatchStateModel {
@@ -38,12 +45,11 @@ export class StopwatchState {
   }
 
   @Action(SaveTimeFrame)
-  saveTimeFrame({getState, setState}: StateContext<StopwatchStateModel>,
-                {payload}: SaveTimeFrame) {
+  saveTimeFrame({getState, setState}: StateContext<StopwatchStateModel>) {
 
     const state = getState();
     const timeWatchArray = state.stopwatch.timeWatchArray;
-    timeWatchArray.unshift(payload);
+    timeWatchArray.unshift(state.stopwatch.data.displayTime);
     setState({
       stopwatch: {
         ...state.stopwatch,
@@ -85,6 +91,16 @@ export class StopwatchState {
   clearAll({setState}: StateContext<StopwatchStateModel>) {
     setState({
       ...defaultState
+    });
+  }
+
+  @Action(UpdateFromLocalStorage)
+  updateFromLocalStorage({getState, setState}: StateContext<StopwatchStateModel>,
+                         {stopwatch}: any) {
+    console.log(stopwatch);
+    console.log(getState());
+    setState({
+      ...stopwatch
     });
   }
 }

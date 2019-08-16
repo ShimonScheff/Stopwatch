@@ -69,12 +69,11 @@ export class StopwatchComponent {
     this.store.dispatch(new PauseStopwatch());
   }
 
-  addTimeFrame() {
-    this.store.dispatch(new SaveTimeFrame(this.displayTime));
+async  addTimeFrame() {
+    this.store.dispatch(new SaveTimeFrame());
   }
 
   clear() {
-   // this.timeWatchArray = [];
     this.running = false;
     clearInterval(this.intervalTime);
     this.store.dispatch(new ClearAll());

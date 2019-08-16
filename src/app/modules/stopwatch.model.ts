@@ -23,3 +23,7 @@ export const defaultState = {
     timeWatchArray: []
   }
 }
+
+export interface StateModel {
+  stopwatch: StopwatchModel;
+}

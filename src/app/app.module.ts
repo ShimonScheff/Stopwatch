@@ -1,15 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {NgxsModule} from '@ngxs/store';
 import {StopwatchState} from './state/stopwatch.state';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
-import { TimesComponent } from './components/times/times.component';
-import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
+import {TimesComponent} from './components/times/times.component';
+import {StopwatchComponent} from './components/stopwatch/stopwatch.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
-      storage: 1,
       migrations: [
         {
           version: 1,
@@ -37,10 +36,11 @@ import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
             };
           }
         }
-        ]
-    })
+      ]
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
