@@ -1,9 +1,9 @@
 export interface StopwatchModel {
   data: {
-    counter: number,
-    displayTime: string[]
-    running: boolean
-  },
+    counter: number;
+    displayTime: string[];
+    running: boolean;
+  };
   timeWatchArray: string[][];
 }
 
@@ -22,8 +22,4 @@ export const defaultState = {
     },
     timeWatchArray: []
   }
-}
-
-export interface StateModel {
-  stopwatch: StopwatchModel;
-}
+};

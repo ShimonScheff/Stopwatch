@@ -1,5 +1,4 @@
-import {StateModel, StopwatchIntervalModel} from '../modules/stopwatch.model';
-import {StopwatchStateModel} from '../state/stopwatch.state';
+import {StopwatchIntervalModel} from '../models/stopwatch.model';
 
 export class StopWatchInterval {
   static readonly type = '[STOPWATCH] Stopwatch is running';
@@ -25,10 +24,4 @@ export class RemoveTimeFrame {
 
 export class ClearAll {
   static readonly type = '[STOPWATCH] Clear state'
-}
-
-export class UpdateFromLocalStorage {
-  static readonly type = '[APP] Update All State';
-
-  constructor(public stopwatch: StateModel) {}
 }

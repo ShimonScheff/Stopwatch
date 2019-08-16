@@ -1,12 +1,11 @@
-import {defaultState, StateModel, StopwatchModel} from '../modules/stopwatch.model';
+import {defaultState, StopwatchModel} from '../models/stopwatch.model';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {
   ClearAll,
   PauseStopwatch,
   RemoveTimeFrame,
   SaveTimeFrame,
-  StopWatchInterval,
-  UpdateFromLocalStorage
+  StopWatchInterval
 } from '../actions/stopwatch.action';
 
 
@@ -92,14 +91,6 @@ export class StopwatchState {
   clearAll({setState}: StateContext<StopwatchStateModel>) {
     setState({
       ...defaultState
-    });
-  }
-
-  @Action(UpdateFromLocalStorage)
-  updateFromLocalStorage({getState, setState}: StateContext<StopwatchStateModel>,
-                         {stopwatch}: any) {
-    setState({
-      ...stopwatch
     });
   }
 }
