@@ -1,0 +1,16 @@
+<div class="wrpper">
+  <div>
+    <div class="logs"
+         *ngFor="let time of timeWatchArray$ | async; let i = index">
+      <div class="remove" (click)="remove(i)">REMOVE</div>
+      <span>{{time[0]}}</span>
+      <span>{{time[1]}}</span>
+      <span style="text-align: center">:</span>
+      <span>{{time[2]}}</span>
+      <span>{{time[3]}}</span>
+      <span style="text-align: center">.</span>
+      <span>{{time[4]}}</span>
+      <span>{{time[5]}}</span>
+    </div>
+  </div>
+</div>

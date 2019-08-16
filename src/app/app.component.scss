@@ -1,9 +1,3 @@
-.wrpper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
 .stopwatch {
   width: 330px;
   text-align: center;
@@ -62,39 +56,4 @@
   border-left: none;
 }
 
-.logs {
-  text-align: left;
-  width: 360px;
-  color: white;
-  border-bottom: 1px solid #ffffff59;
-  line-height: 50px;
-  font-size: 22px;
-  position: relative;
-}
 
-.logs span {
-  display: inline-block;
-  padding-right: 3px;
-  font-family: Digital7;
-
-}
-
-.logs:hover .remove {
-  visibility: visible;
-}
-
-.logs .remove {
-  visibility: hidden;
-}
-
-.remove {
-  background-color: red;
-  font-size: 12px;
-  width: 60px;
-  line-height: 24px;
-  position: absolute;
-  right: 2px;
-  top: 10px;
-  text-align: center;
-  cursor: pointer;
-}

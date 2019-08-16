@@ -1,4 +1,7 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Store} from '@ngxs/store';
+import {SaveTimeFrame, StartStopwatch} from './actions/stopwatch.action';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +14,10 @@ export class AppComponent implements OnChanges {
   actionText = 'Play';
   running = false;
   timeWatchArray = [];
-
   counter: any;
   intervalTime: any;
 
-  constructor() {
-    // update from local storage
-  }
+  constructor(private store: Store) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
@@ -51,6 +51,11 @@ export class AppComponent implements OnChanges {
 
       const time = minutes + seconds + milliseconds;
       this.displayTime = time.split('');
+      this.store.dispatch(new StartStopwatch({
+        displayTime: this.displayTime,
+        timeWatchArray: this.timeWatchArray
+      }));
+
     }, 1);
   }
 
@@ -61,7 +66,9 @@ export class AppComponent implements OnChanges {
   }
 
   addTimeFrame() {
-    this.timeWatchArray.unshift(this.displayTime);
+    // this.timeWatchArray.unshift(this.displayTime);
+    console.log(this.displayTime)
+    this.store.dispatch(new SaveTimeFrame(this.displayTime));
   }
 
   remove(index) {
