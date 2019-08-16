@@ -9,11 +9,13 @@ import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 import { TimesComponent } from './components/times/times.component';
+import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TimesComponent,
+    StopwatchComponent,
   ],
   imports: [
     BrowserModule,
