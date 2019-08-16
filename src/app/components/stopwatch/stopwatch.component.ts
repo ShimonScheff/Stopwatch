@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ClearAll, PauseStopwatch, SaveTimeFrame, StopWatchInterval} from '../../actions/stopwatch.action';
 import {Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
