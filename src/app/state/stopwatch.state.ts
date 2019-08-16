@@ -1,6 +1,6 @@
-import {StopwatchModel} from '../modules/stopwatch.model';
+import {defaultState, StopwatchModel} from '../modules/stopwatch.model';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
-import {RemoveTimeFrame, SaveTimeFrame, StartStopwatch} from '../actions/stopwatch.action';
+import {ClearAll, PauseStopwatch, RemoveTimeFrame, SaveTimeFrame, StopWatchInterval} from '../actions/stopwatch.action';
 
 
 export class StopwatchStateModel {
@@ -10,10 +10,7 @@ export class StopwatchStateModel {
 @State<StopwatchStateModel>({
   name: 'StopwatchState',
   defaults: {
-    stopwatch: {
-      displayTime: ['fff'],
-      timeWatchArray: []
-    }
+    ...defaultState
   }
 })
 export class StopwatchState {
@@ -23,16 +20,19 @@ export class StopwatchState {
     return state.stopwatch;
   }
 
-  @Action(StartStopwatch)
-  startStopwatch({getState, patchState}: StateContext<StopwatchStateModel>,
-                 {payload}: StartStopwatch) {
+  @Action(StopWatchInterval)
+  stopWatchInterval({getState, setState}: StateContext<StopwatchStateModel>,
+                    {payload}: StopWatchInterval) {
     const state = getState();
-    console.log(state);
-
-    patchState({
+    setState({
       stopwatch: {
-        displayTime: payload.displayTime,
-        timeWatchArray: payload.timeWatchArray,
+        ...state.stopwatch,
+        data: {
+          ...state.stopwatch.data,
+          counter: payload.counter,
+          displayTime: payload.displayTime,
+          running: true
+        }
       }
     });
   }
@@ -65,6 +65,26 @@ export class StopwatchState {
         timeWatchArray
       }
     });
+  }
 
+  @Action(PauseStopwatch)
+  pauseStopwatch({getState, setState}: StateContext<StopwatchStateModel>) {
+    const state = getState();
+    setState({
+      stopwatch: {
+        data: {
+          ...state.stopwatch.data,
+          running: false
+        },
+        timeWatchArray: state.stopwatch.timeWatchArray
+      }
+    });
+  }
+
+  @Action(ClearAll)
+  clearAll({setState}: StateContext<StopwatchStateModel>) {
+    setState({
+      ...defaultState
+    });
   }
 }

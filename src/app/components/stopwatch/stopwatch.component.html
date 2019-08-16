@@ -10,15 +10,15 @@
       <span>8</span>
       <span>8</span>
     </span>
-    <span class="text">
-      <span>{{displayTime[0]}}</span>
-      <span>{{displayTime[1]}}</span>
+    <span class="text" *ngIf="(displayTime$ | async) as data">
+      <span>{{data[0]}}</span>
+      <span>{{data[1]}}</span>
       <span style="text-align: center">:</span>
-      <span>{{displayTime[2]}}</span>
-      <span>{{displayTime[3]}}</span>
+      <span>{{data[2]}}</span>
+      <span>{{data[3]}}</span>
       <span style="text-align: center">.</span>
-      <span>{{displayTime[4]}}</span>
-      <span>{{displayTime[5]}}</span>
+      <span>{{data[4]}}</span>
+      <span>{{data[5]}}</span>
     </span>
   </div>
 </div>
@@ -27,7 +27,8 @@
     <div style="flex:4"
          (click)="running ? stop() : startStopWatch()">
       <i *ngIf="!running" class="fa fa-play"></i>
-      {{ actionText }}
+      <span *ngIf="!running">Play</span>
+      <span *ngIf="running">Stop</span>
     </div>
     <div style="flex:1" (click)="addTimeFrame()">
       <i class="fa fa-clock-o"></i>

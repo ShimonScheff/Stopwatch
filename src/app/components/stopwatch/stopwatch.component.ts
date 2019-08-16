@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {SaveTimeFrame, StartStopwatch} from '../../actions/stopwatch.action';
+import {Component, OnInit} from '@angular/core';
+import {ClearAll, PauseStopwatch, SaveTimeFrame, StopWatchInterval} from '../../actions/stopwatch.action';
 import {Store} from '@ngxs/store';
+import {Observable} from 'rxjs';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-stopwatch',
@@ -10,18 +12,27 @@ import {Store} from '@ngxs/store';
 export class StopwatchComponent {
   clearDisplayTime = ['0', '0', '0', '0', '0', '0'];
   displayTime = this.clearDisplayTime;
-  actionText = 'Play';
+  displayTime$: Observable<[][]>;
   running = false;
-  timeWatchArray = [];
   counter: any;
   intervalTime: any;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.displayTime$ = this.store.select(state => state.StopwatchState.stopwatch.data.displayTime);
+    this.store.select(state => state.StopwatchState.stopwatch.data)
+      .pipe(first()).subscribe((data) => {
+        this.counter = data.counter;
+        this.displayTime = data.displayTime;
+        if (data.running) {
+          this.startStopWatch();
+        }
+      }
+    );
+  }
 
   startStopWatch() {
-    this.running = !this.running;
-    this.actionText = 'Stop';
     const startTime = Date.now() - (this.counter || 0);
+    this.running = true;
     this.intervalTime = setInterval(() => {
       this.counter = Date.now() - startTime;
       let milliseconds: any = Math.floor(Math.floor(this.counter % 1000) / 10).toFixed(0);
@@ -45,35 +56,28 @@ export class StopwatchComponent {
 
       const time = minutes + seconds + milliseconds;
       this.displayTime = time.split('');
-      this.store.dispatch(new StartStopwatch({
+      this.store.dispatch(new StopWatchInterval({
         displayTime: this.displayTime,
-        timeWatchArray: this.timeWatchArray
+        counter: this.counter
       }));
-
     }, 1);
   }
 
   stop() {
-    this.actionText = 'Play';
-    this.running = !this.running;
+    this.running = false;
     clearInterval(this.intervalTime);
+    this.store.dispatch(new PauseStopwatch());
   }
 
   addTimeFrame() {
-    // this.timeWatchArray.unshift(this.displayTime);
-    console.log(this.displayTime);
     this.store.dispatch(new SaveTimeFrame(this.displayTime));
   }
 
-  remove(index) {
-    this.timeWatchArray.splice(index, 1);
-  }
-
   clear() {
-    this.timeWatchArray = [];
+   // this.timeWatchArray = [];
     this.running = false;
-    this.displayTime = this.clearDisplayTime;
     clearInterval(this.intervalTime);
+    this.store.dispatch(new ClearAll());
   }
 
 }

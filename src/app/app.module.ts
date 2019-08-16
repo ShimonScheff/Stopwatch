@@ -26,6 +26,7 @@ import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
+      storage: 1,
       migrations: [
         {
           version: 1,
