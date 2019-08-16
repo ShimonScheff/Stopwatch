@@ -48,8 +48,9 @@ export class StopwatchState {
   saveTimeFrame({getState, setState}: StateContext<StopwatchStateModel>) {
 
     const state = getState();
-    const timeWatchArray = state.stopwatch.timeWatchArray;
-    timeWatchArray.unshift(state.stopwatch.data.displayTime);
+    const timeWatchArray = Object.assign([], state.stopwatch.timeWatchArray);
+    const displayTime = state.stopwatch.data.displayTime;
+    timeWatchArray.unshift(displayTime);
     setState({
       stopwatch: {
         ...state.stopwatch,
@@ -63,7 +64,7 @@ export class StopwatchState {
                   {index}: RemoveTimeFrame) {
 
     const state = getState();
-    const timeWatchArray = state.stopwatch.timeWatchArray;
+    const timeWatchArray = Object.assign([], state.stopwatch.timeWatchArray);
     timeWatchArray.splice(index, 1);
     setState({
       stopwatch: {
@@ -97,8 +98,6 @@ export class StopwatchState {
   @Action(UpdateFromLocalStorage)
   updateFromLocalStorage({getState, setState}: StateContext<StopwatchStateModel>,
                          {stopwatch}: any) {
-    console.log(stopwatch);
-    console.log(getState());
     setState({
       ...stopwatch
     });

@@ -6,10 +6,11 @@ import {AppComponent} from './app.component';
 import {NgxsModule} from '@ngxs/store';
 import {StopwatchState} from './state/stopwatch.state';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
-import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 import {TimesComponent} from './components/times/times.component';
 import {StopwatchComponent} from './components/stopwatch/stopwatch.component';
+import {StorageModule} from '@ngx-pwa/local-storage';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,15 @@ import {StopwatchComponent} from './components/stopwatch/stopwatch.component';
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([
-      StopwatchState
-    ]),
+        StopwatchState
+      ],
+      {
+        developmentMode: !environment.production
+      }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
+    StorageModule.forRoot({
+      IDBNoWrap: true,
+    }),
     NgxsStoragePluginModule.forRoot({
       migrations: [
         {

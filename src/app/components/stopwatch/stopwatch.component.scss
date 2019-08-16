@@ -11,18 +11,18 @@
   padding: 19px;
   letter-spacing: 2px;
   height: 55px;
-}
 
-.stopwatch .text, .stopwatch .halo {
-  min-width: 20px;
-  text-align: right;
-  font-family: Digital7;
-}
+  .text, .halo {
+    min-width: 20px;
+    text-align: right;
+    font-family: Digital7;
+  }
 
-.stopwatch .text span, .stopwatch .halo span {
-  display: inline-block;
-  text-align: right;
-  min-width: 20px;
+  .text span, .halo span {
+    display: inline-block;
+    text-align: right;
+    min-width: 20px;
+  }
 }
 
 .halo {
