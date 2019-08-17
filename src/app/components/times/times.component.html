@@ -2,7 +2,21 @@
   <div>
     <div class="logs"
          *ngFor="let time of timeWatchArray$ | async; let i = index">
-      <div class="remove" (click)="remove(i)">REMOVE</div>
+      <div class="remove" (click)="remove(i)">
+        REMOVE
+      </div>
+
+      <span class="halo">
+        <span>8</span>
+        <span>8</span>
+        <span style="text-align: center">:</span>
+        <span>8</span>
+        <span>8</span>
+        <span style="text-align: center">.</span>
+        <span>8</span>
+        <span>8</span>
+      </span>
+
       <span>{{time[0]}}</span>
       <span>{{time[1]}}</span>
       <span style="text-align: center">:</span>

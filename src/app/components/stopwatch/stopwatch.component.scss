@@ -24,6 +24,12 @@
     min-width: 20px;
   }
 
+  .halo {
+    position: absolute;
+    top: 36px;
+    opacity: 0.2;
+  }
+
   .blink {
     animation: blink-animation 1s steps(5, start) infinite;
     -webkit-animation: blink-animation 1s steps(5, start) infinite;
@@ -38,12 +44,6 @@
       visibility: hidden;
     }
   }
-}
-
-.halo {
-  position: absolute;
-  top: 36px;
-  opacity: 0.2;
 }
 
 .stopwatch-controller {

@@ -18,6 +18,12 @@
   .remove {
     visibility: hidden;
   }
+
+  .halo {
+    position: absolute;
+    top: 1px;
+    opacity: 0.2;
+  }
 }
 
 .logs:hover .remove {
