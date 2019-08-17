@@ -29,9 +29,16 @@
   <div class="stopwatch-controller">
     <div style="flex:4"
          (click)="running ? stop() : startStopWatch()">
-      <i *ngIf="!running" class="fa fa-play"></i>
-      <span *ngIf="!running">Play</span>
-      <span *ngIf="running">Stop</span>
+      <span *ngIf="!running">
+        <i class="fa fa-play"></i>
+        <span *ngIf="!running"> Play</span>
+      </span>
+
+      <span *ngIf="running">
+        <i  class="fa fa-pause"></i>
+        <span> Stop</span>
+      </span>
+
     </div>
     <div style="flex:1" (click)="addTimeFrame()">
       <i class="fa fa-clock-o"></i>
