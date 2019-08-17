@@ -26,13 +26,13 @@ export class StopwatchComponent implements OnDestroy {
     this.displayTime$ = this.store.select(state => state.StopwatchState.stopwatch.data.displayTime);
     this.sub = this.store.select(state => state.StopwatchState.stopwatch.data)
       .pipe(first()).subscribe((data) => {
-        this.counter = data.counter;
-        this.displayTime = data.displayTime;
-        if (data.running) {
-          this.startStopWatch();
+          this.counter = data.counter;
+          this.displayTime = data.displayTime;
+          if (data.running) {
+            this.startStopWatch();
+          }
         }
-      }
-    );
+      );
   }
 
   ngOnDestroy() {
@@ -47,16 +47,19 @@ export class StopwatchComponent implements OnDestroy {
       let milliseconds: any = Math.floor(Math.floor(this.counter % 1000) / 10).toFixed(0);
       let minutes: any = Math.floor(this.counter / 60000);
       let seconds: any = Math.floor(Math.floor(this.counter % 60000) / 1000).toFixed(0);
+
       if (Number(minutes) < 10) {
         minutes = '0' + minutes;
       } else {
         minutes = '' + minutes;
       }
+
       if (Number(milliseconds) < 10) {
         milliseconds = '0' + milliseconds;
       } else {
         milliseconds = '' + milliseconds;
       }
+
       if (Number(seconds) < 10) {
         seconds = '0' + seconds;
       } else {
