@@ -85,6 +85,7 @@ export class StopwatchComponent implements OnDestroy {
   clear() {
     this.running = false;
     clearInterval(this.intervalTime);
+    this.counter = 0;
     this.store.dispatch(new ClearAll());
   }
 
