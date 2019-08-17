@@ -1,25 +1,30 @@
-import {Component} from '@angular/core';
-import {ClearAll, PauseStopwatch, SaveTimeFrame, StopWatchInterval} from '../../actions/stopwatch.action';
-import {Store} from '@ngxs/store';
-import {Observable} from 'rxjs';
+import {Component, OnDestroy} from '@angular/core';
+
+import {Observable, Subscription} from 'rxjs';
 import {first} from 'rxjs/operators';
+import {Store} from '@ngxs/store';
+
+import {ClearAll, PauseStopwatch, SaveTimeFrame, StopWatchInterval} from '../../actions/stopwatch.action';
 
 @Component({
   selector: 'app-stopwatch',
   templateUrl: './stopwatch.component.html',
   styleUrls: ['./stopwatch.component.scss']
 })
-export class StopwatchComponent {
+export class StopwatchComponent implements OnDestroy {
   clearDisplayTime = ['0', '0', '0', '0', '0', '0'];
   displayTime = this.clearDisplayTime;
   displayTime$: Observable<[][]>;
   running = false;
   counter: any;
   intervalTime: any;
+  sub: Subscription;
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store
+  ) {
     this.displayTime$ = this.store.select(state => state.StopwatchState.stopwatch.data.displayTime);
-    this.store.select(state => state.StopwatchState.stopwatch.data)
+    this.sub = this.store.select(state => state.StopwatchState.stopwatch.data)
       .pipe(first()).subscribe((data) => {
         this.counter = data.counter;
         this.displayTime = data.displayTime;
@@ -28,6 +33,10 @@ export class StopwatchComponent {
         }
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   startStopWatch() {
@@ -69,7 +78,7 @@ export class StopwatchComponent {
     this.store.dispatch(new PauseStopwatch());
   }
 
-async  addTimeFrame() {
+  async addTimeFrame() {
     this.store.dispatch(new SaveTimeFrame());
   }
 

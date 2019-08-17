@@ -4,14 +4,15 @@
   color: white;
   border-bottom: 1px solid #ffffff59;
   line-height: 50px;
-  font-size: 22px;
   position: relative;
 
   span {
     display: inline-block;
     padding-right: 3px;
+    min-width: 9px;
     font-family: Digital7, sans-serif;
-
+    text-align: right;
+    font-size: 20px;
   }
 
   .remove {
